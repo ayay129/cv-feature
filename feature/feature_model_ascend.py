@@ -25,11 +25,11 @@ class EfficientNetB7Ascend:
         output_shape: Optional[str] = None,
         device_id: Optional[int] = None,
     ):
-        om_dir = os.getenv("FEATURE_OM_DIR", "resources",acl.get_soc_name())
+        om_dir = os.getenv("FEATURE_OM_DIR", "resources")
         if om_path is None:
             om_path = os.getenv("FEATURE_OM_PATH")
         if om_path is None:
-            candidates = sorted(glob.glob(os.path.join(om_dir, "*.om")))
+            candidates = sorted(glob.glob(os.path.join(om_dir, acl.get_soc_name(), "*.om")))
             if not candidates:
                 raise FileNotFoundError(f"No .om file found in {om_dir}")
             om_path = candidates[0]

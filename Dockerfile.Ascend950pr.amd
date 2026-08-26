@@ -9,5 +9,5 @@ RUN sed -i 's@http://archive.ubuntu.com/ubuntu/@https://repo.huaweicloud.com/ubu
         python3.10-venv \
         python3-pip && \
      /usr/bin/python3.10 -m venv /opt/py310
-ENV PATH="/opt/py310/bin:$PATH" FEATURE_BACKEND=ais_bench
+ENV PATH="/opt/py310/bin:$PATH" FEATURE_BACKEND=ascend
 RUN pip config set global.index-url https://repo.huaweicloud.com/repository/pypi/simple
