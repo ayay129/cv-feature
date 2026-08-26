@@ -13,5 +13,6 @@ ENV PATH="/opt/py310/bin:$PATH" FEATURE_BACKEND=ascend
 COPY . /app
 WORKDIR /app
 RUN pip config set global.index-url https://repo.huaweicloud.com/repository/pypi/simple && \
+    pip install /app/ascend_patchs/common/*.whl && \
     pip install requirements.ascend950pr.amd 
 CMD ["python", "-m", "feature.main"]
