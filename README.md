@@ -19,8 +19,9 @@
 
 ## 项目结构
 - `feature/`：服务与模型代码
-  - `feature_model.py`：PyTorch 版（加载 `pth`）
   - `feature_model_onnx.py`：ONNX 版特征提取
+  - `feature_model_ascend.py`：昇腾 OM/ais_bench 版特征提取
+  - `feature_model_pth.py`：PyTorch 版（加载 `pth`）
   - `base_model_onnx.py`：ONNX 基础类，封装加载/预处理/推理/解码
   - `feature_service.py`、`main.py`：FastAPI 服务
   - `convert_to_onnx.py`：将 `pth` 导出为 ONNX 的脚本
@@ -65,6 +66,7 @@ uvicorn feature.main:create_app --host 0.0.0.0 --port 8000 --factory
 ```
 
 - 默认 `FeatureService` 内部使用 ONNX 版模型。如果你的 ONNX 文件不是 `resources/efnet_b7.onnx`，可以在 `feature_service.py` 中给 `EfficientNetB7Onnx` 传入路径，或把你的模型文件重命名/软链接为该路径。
+- `FEATURE_BACKEND` 支持 `onnx`（默认）、`ascend` 和 `pth`；原有的 `ais_bench` 值仍可作为 `ascend` 别名使用。
 - 接口文档：访问 `http://localhost:8000/docs`
 
 接口示例（上传图片返回特征向量）：

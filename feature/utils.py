@@ -2,11 +2,13 @@ from typing import List
 
 import numpy as np
 
-# 兼容导入：支持包运行（python -m feature.compare_similarity）和脚本直跑（python feature/compare_similarity.py）
+# 兼容导入：支持包运行和脚本直跑
 try:
-    from .feature_model import EfficientNetB7Onnx,EfficientNetBottom
+    from .feature_model_onnx import EfficientNetB7Onnx
+    from .feature_model_pth import EfficientNetB7Pth
 except ImportError:
-    from feature.feature_model import EfficientNetB7Onnx,EfficientNetBottom
+    from feature.feature_model_onnx import EfficientNetB7Onnx
+    from feature.feature_model_pth import EfficientNetB7Pth
 
 
 def cosine_similarity(a: List[float], b: List[float]) -> float:
@@ -29,7 +31,7 @@ def euclidean_distance(a: List[float], b: List[float]) -> float:
 def main():
     
     model1 = EfficientNetB7Onnx("resources/tf_efficientnet_b7_ns-1dbc32de.onnx")
-    model2 = EfficientNetBottom("resources/tf_efficientnet_b7_ns-1dbc32de.pth")
+    model2 = EfficientNetB7Pth("resources/tf_efficientnet_b7_ns-1dbc32de.pth")
 
     with open("test/生成真实人物图片.png", "rb") as f:
         bytes1 = f.read()

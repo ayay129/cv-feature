@@ -1,0 +1,10 @@
+fastapi==0.141.1
+uvicorn==0.52.4
+pillow==12.3.0
+onnxruntime==1.23.2
+timm==1.0.28
+decorator==5.3.1
+scipy==1.15.3
+psutil==7.2.2
+loguru==0.7.3
+orjson==3.12.0
