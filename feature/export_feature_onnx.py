@@ -102,3 +102,6 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+# 示例
+# python export_feature_onnx.py --pth resources/tf_efficientnet_b7_ns-1dbc32de.pth --onnx resources/tf_efficientnet_b7_ns-1dbc32de.onnx --image-size 600 --opset 11 --truncate-last-blocks 5
+# atc --model=./resources/tf_efficientnet_b7_ns-1dbc32de_fixmean.onnx   --framework=5 --output=./resources/tf_efficientnet_b7_ns-1dbc32de --input_format=ND --input_shape="input:1,3,600,600" --soc_version=Ascend310P3 --precision_mode=allow_fp32_to_fp16 --log=info
