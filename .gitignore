@@ -14,7 +14,6 @@ build/
 dist/
 *.egg-info/
 *.egg
-*.whl
 
 # 测试与覆盖率缓存
 .pytest_cache/
