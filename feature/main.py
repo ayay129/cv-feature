@@ -3,10 +3,10 @@
 @date: 2025/03/21
 """
 from contextlib import asynccontextmanager
+from functools import lru_cache
 
 from fastapi import Depends, FastAPI, File, UploadFile
 from fastapi.responses import ORJSONResponse
-from feature import feature_service
 from starlette.middleware.cors import CORSMiddleware
 
 from loguru import logger
@@ -14,8 +14,15 @@ from loguru import logger
 from feature.feature_service import FeatureService
 from feature.logger import init_log, log_details
 
+
+@lru_cache(maxsize=1)
+def get_feature_service() -> FeatureService:
+    return FeatureService()
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    get_feature_service()
     yield
 
 
@@ -46,12 +53,6 @@ def create_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
-    
-    from functools import lru_cache
-
-    @lru_cache(maxsize=1)
-    def get_feature_service() -> FeatureService:
-        return FeatureService()
     
     @app.post("/img_file/")
     async def img_file(file: UploadFile = File(...), service: FeatureService = Depends(get_feature_service)):
